@@ -1,4 +1,4 @@
-token: "lip_EQWGhLWMCxYaBJXpcwS6"    # Lichess OAuth2 Token.
+token: "lip_MBHBy3EXqxvezOOFoPrm"    # Lichess OAuth2 Token.
 url: "https://lichess.org/"  # Lichess base URL.
 
 engine:                      # Engine settings.
@@ -54,7 +54,7 @@ engine:                      # Engine settings.
     chessdb_book:
       enabled: false
       min_time: 20
-      move_quality: "good"   # One of "all", "good", "best".
+      move_quality: "best"   # One of "all", "good", "best".
       min_depth: 20          # Only for move_quality: "best".
       contribute: true
     lichess_cloud_analysis:
@@ -74,27 +74,15 @@ engine:                      # Engine settings.
 #   cpuct: 3.1
   homemade_options:
 #   Hash: 256
-  uci_options:               # arbitrary UCI options passed to the engine
- 
-option name Contempt type spin : 24
-option name Analysis Contempt type combo : Both var Off var White var Black var Both
-option name Threads type spin : 18
-option name Hash type spin : 24567
-option name Ponder type check : true
-option name MultiPV type spin : 70
-option name Skill Level type spin : 20
-option name Move Overhead type spin : 49999
-option name nodestime type spin : 0
-option name UCI_Chess960 type check : false
-option name UCI_AnalyseMode type check : false
-option name UCI_LimitStrength type check : false
-option name UCI_Elo type spin : 2850
-option name UCI_ShowWDL type check : true
-option name SyzygyPath type string : <empty>
-option name SyzygyProbeDepth type spin : 100
-option name Syzygy50MoveRule type check : true
-option name SyzygyProbeLimit type spin : 7
-option name Use NNUE type check : true
+uci_options:                            # Arbitrary UCI options passed to the engine. (Commenting allowed)
+    Move Overhead: 280
+    Threads: 3                            # Max CPU threads the engine can use.
+    Hash: 128                             # Max memory (in megabytes) the engine can allocate.
+    Skill Level: 20
+    UCI_Elo : 2850
+    MultiPV: 17
+    Slow Mover: 40
+  
 #    go_commands:             # additional options to pass to the UCI go command
 #      nodes: 5000               # Search so many nodes only.
 #      depth: 20               # Search depth ply only.
@@ -167,7 +155,7 @@ greeting:
     #   {opponent} to insert opponent's name
     #   {me} to insert bot's name
     # Any other words in curly braces will be removed.
-    #hello: "Hi! I'm {me}. Good luck! Type !help for a list of commands I can respond to." # Message to send to chat at the start of a game
-    #goodbye: "Good game!" # Message to send to chat at the end of a game
+    hello: "Hi! I'm {me}. Good luck! Type !help for a list of commands I can respond to." # Message to send to chat at the start of a game
+    goodbye: "Good game!" # Message to send to chat at the end of a game
 
 # pgn_directory: "game_records" # A directory where PGN-format records of the bot's games are kept
