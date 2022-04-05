@@ -246,6 +246,15 @@ def play_game(li, game_id, control_queue, user_profile, config, challenge_queue,
     engine = engine_wrapper.create_engine(config, game.variant_name)
     engine.get_opponent_info(game)
     conversation = Conversation(game, engine, li, __version__, challenge_queue)
+    
+    
+    class SendLine:
+        def __init__(self, room):
+            self.room = room
+    opponent = game.black.name if game.white.name == user_profile["username"] else game.white.name
+    conversation.send_reply(SendLine('player'), f'Good Luck @{opponent}')
+    conversation.send_reply(SendLine('spectator'), f'Welcome to the game spectators!')
+    
 
     logger.info(f"+++ {game}")
 
@@ -343,6 +352,10 @@ def play_game(li, game_id, control_queue, user_profile, config, challenge_queue,
                 break
         except StopIteration:
             break
+            
+    conversation.send_reply(SendLine('player'), f'Thanks for playing with me')
+    conversation.send_reply(SendLine('spectator'), f'Thanks for watching my game!')
+    
 
     engine.stop()
     engine.quit()
